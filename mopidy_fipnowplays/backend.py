@@ -4,27 +4,23 @@ import requests
 import logging
 import pykka
 
-from mopidy import audio, core
+from mopidy import backend
 from mopidy.models import Album, Artist, Track
+from mopidy.audio import Audio
 
 logger = logging.getLogger(__name__)    
 
-class Fipnowplays(pykka.ThreadingActor, core.CoreListener):
-    stream_uris = {'FIP':'http://direct.fipradio.fr/live/fip-midfi.mp3'}
+class Fipnowplays(pykka.ThreadingActor, backend.Backend):
+    stream_uris = {'FIP':''}
     metadata_uris = {'FIP':'http://www.fipradio.fr/livemeta/7'}
     
-    def __init__(self, config, core):
+    
+    def __init__(self, config, audio):
         super(Fipnowplays, self).__init__()
-        self.core = core
+        self.audio = audio
         self.current_stream = 'FIP'
-
+        self.update_metadata()
             
-    def track_playback_started(self, tl_track):
-        track = tl_track.track
-        if (track.uri == self.stream_uris[self.current_stream]):
-            self.audio = self.core.audio
-            self.update_metadata()
-
     def update_metadata(self):
         r = requests.post(Fipnowplays.metadata_uris[self.current_stream])
         
@@ -54,5 +50,5 @@ class Fipnowplays(pykka.ThreadingActor, core.CoreListener):
                            date=l_date,
                            comment=l_label
                            )
-        self.core.audio.set_metadata(self.track)
-        #self.core.tags_changed(self.track)
+        self.audio.set_metadata(self.track)
+

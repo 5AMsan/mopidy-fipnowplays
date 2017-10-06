@@ -6,8 +6,8 @@ Mopidy-FipNowPlays
     :target: https://pypi.python.org/pypi/Mopidy-FipNowPlays/
     :alt: Latest PyPI version
 
-.. image:: https://img.shields.io/travis/5amsan/mopidy-fipnowplays/master.svg?style=flat
-    :target: https://travis-ci.org/5amsan/mopidy-fipnowplays
+.. image:: https://img.shields.io/travis/5AMsan/mopidy-fipnowplays/master.svg?style=flat
+    :target: https://travis-ci.org/5AMsan/mopidy-fipnowplays
     :alt: Travis CI build status
 
 .. image:: https://img.shields.io/coveralls/5amsan/mopidy-fipnowplays/master.svg?style=flat
